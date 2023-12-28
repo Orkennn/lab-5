@@ -1,0 +1,85 @@
+class Car:
+    def __init__(self, marka: str, car_class: str, weight: float, driver: 'Driver', engine: 'Engine'):
+        self.marka = marka
+        self.car_class = car_class
+        self.weight = weight
+        self.driver = driver
+        self.engine = engine
+
+    def start(self):
+        print("Поехали")
+
+    def stop(self):
+        print("Останавливаемся")
+
+    def turnRight(self):
+        print("Поворот направо")
+
+    def turnLeft(self):
+        print("Поворот налево")
+
+    def __str__(self):
+        return f"Marka: {self.marka}, Class: {self.car_class}, Weight: {self.weight}, {str(self.driver)}, {str(self.engine)}"
+
+
+class Engine:
+    def __init__(self, power: int, company: str):
+        self.power = power
+        self.company = company
+
+    def __str__(self):
+        return f"Power: {self.power} л.с., Company: {self.company}"
+
+
+class Person:
+    def __init__(self, full_name: str, experience: int):
+        self.full_name = full_name
+        self.experience = experience
+
+    def __str__(self):
+        return f"Full Name: {self.full_name}, Experience: {self.experience} years"
+
+
+class Driver(Person):
+    def __init__(self, full_name: str, experience: int):
+        super().__init__(full_name, experience)
+
+    def __str__(self):
+        return f"Driver: {super().__str__()}"
+
+
+class Lorry(Car):
+    def __init__(self, marka: str, weight: float, driver: Driver, engine: Engine, carrying: int):
+        super().__init__(marka, "Грузовик", weight, driver, engine)
+        self.carrying = carrying
+
+    def __str__(self):
+            return f"Информация о грузовике:\n{super().__str__()}, Carrying: {self.carrying} кг"
+
+
+class SportCar(Car):
+    def __init__(self, marka: str, weight: float, driver: Driver, engine: Engine, speed: int):
+        super().__init__(marka, "Спорткар", weight, driver, engine)
+        self.speed = speed
+
+    def __str__(self):
+        return f"Информация о спорткаре:\n{super().__str__()}, Speed: {self.speed} км/ч"
+
+
+
+driver1 = Driver("Иван Иванов", 5)
+engine1 = Engine(200, "Toyota")
+car = Car("Toyota Camry", "Седан", 1500, driver1, engine1)
+
+driver2 = Driver("Петр Петров", 10)
+engine2 = Engine(300, "Volvo")
+lorry = Lorry("Volvo FH", 8000, driver2, engine2, 5000)
+
+driver3 = Driver("Анна Сидорова", 3)
+engine3 = Engine(400, "Ferrari")
+sportcar = SportCar("Ferrari 488", 1500, driver3, engine3, 300)
+
+
+print(car)
+print(lorry)
+print(sportcar)
